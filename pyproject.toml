@@ -1,13 +1,11 @@
 [project]
 name = "pydantic-serializable"
-version = "0.1.0"
+version = "0.1.1"
 description = "A lightweight, type-safe base class for serializing/deserializing Pydantic models to/from JSON files, with built-in fallback to default data and overwrite protection."
 authors = [
     { name = "Mirage_", email = "gaoxuran111@gmail.com" }
 ]
 license = "MIT"
-homepage = "https://github.com/gxxxr-111/pydantic-serializable"
-repository = "https://github.com/gxxxr-111/pydantic-serializable"
 keywords = ["pydantic", "serialization", "json"]
 readme = "README.md"
 requires-python = ">=3.13,<4.0"
@@ -15,6 +13,10 @@ dependencies = [
     "poetry-core (>=2.0.0)",
     "pydantic (>=2.11.9)"
 ]
+
+[project.urls]
+homepage = "https://github.com/gxxxr-111/pydantic-serializable"
+repository = "https://github.com/gxxxr-111/pydantic-serializable"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

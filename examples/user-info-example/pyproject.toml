@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "user-info-example"
+version = "0.1.0"
+description = "Save and get user info"
+authors = ["Mirage_ <gaoxuran111@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.13,<4.0"
+pydantic-serializable = { path = "../.." }
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
