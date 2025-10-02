@@ -19,6 +19,8 @@ class UserModel(BaseModel):
 class User(Serializable[UserModel]):
     data_type = UserModel
 
+    # load_from_json = False
+
     def _default_data(self) -> UserModel:
         return UserModel()
 
