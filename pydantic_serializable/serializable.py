@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import TypeVar, Generic, Type
+from typing import TypeVar, Generic, get_args
 
 from pydantic import BaseModel
 
@@ -7,12 +7,13 @@ T = TypeVar("T", bound=BaseModel)
 
 
 class Serializable(Generic[T]):
-    data_type: Type[T]
-
     data: T
     save_path: Path
 
     load_from_json: bool = True
+
+    def __init_subclass__(cls) -> None:
+        cls._type_T = get_args(cls.__orig_bases__[0])[0]
 
     def __init__(self):
         self.save_path = self._save_path()
@@ -37,6 +38,6 @@ class Serializable(Generic[T]):
         if not self.load_from_json or not self.save_path.exists():
             return self._default_data()
         try:
-            return self.data_type.model_validate_json(self.save_path.read_text())
+            return self._type_T.model_validate_json(self.save_path.read_text())
         except:
             raise NotImplementedError("Serializable.data_type is not specified")

@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from pydantic import BaseModel, Field
-
 from pydantic_serializable import Serializable
 
 
@@ -17,8 +16,6 @@ class UserModel(BaseModel):
 
 
 class User(Serializable[UserModel]):
-    data_type = UserModel
-
     # load_from_json = False
 
     def _default_data(self) -> UserModel:
