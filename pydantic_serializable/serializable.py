@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import TypeVar, Generic, get_args
 
@@ -6,7 +7,7 @@ from pydantic import BaseModel
 T = TypeVar("T", bound=BaseModel)
 
 
-class Serializable(Generic[T]):
+class Serializable(Generic[T], ABC):
     data: T
     save_path: Path
 
@@ -19,11 +20,13 @@ class Serializable(Generic[T]):
         self.save_path = self._save_path()
         self.data = self.load_data()
 
+    @abstractmethod
     def _default_data(self) -> T:
-        raise NotImplementedError("Serializable._default_data() is not implemented")
+        pass
 
+    @abstractmethod
     def _save_path(self) -> Path:
-        raise NotImplementedError("Serializable._save_path() is not implemented")
+        pass
 
     def save_data(self, overwrite: bool = True) -> None:
         json_data: str = self.data.model_dump_json(indent=2)
