@@ -13,19 +13,16 @@ class Serializable(Generic[T], ABC):
 
     load_from_json: bool = True
 
+    @abstractmethod
+    def _save_path(self) -> Path:
+        pass
+
     def __init_subclass__(cls) -> None:
         cls._type_T = get_args(cls.__orig_bases__[0])[0]
 
     def __init__(self):
         self.save_path = self._save_path()
         self.data = self.load_data()
-
-    def _default_data(self) -> T:
-        return self._type_T()
-
-    @abstractmethod
-    def _save_path(self) -> Path:
-        pass
 
     def save_data(self, overwrite: bool = True) -> None:
         json_data: str = self.data.model_dump_json(indent=2)
@@ -38,7 +35,7 @@ class Serializable(Generic[T], ABC):
 
     def load_data(self) -> T:
         if not self.load_from_json or not self.save_path.exists():
-            return self._default_data()
+            return self._type_T()
         try:
             return self._type_T.model_validate_json(self.save_path.read_text())
         except:
