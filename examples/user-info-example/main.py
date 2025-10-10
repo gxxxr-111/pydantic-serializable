@@ -18,9 +18,6 @@ class UserModel(BaseModel):
 class User(Serializable[UserModel]):
     # load_from_json = False
 
-    def _default_data(self) -> UserModel:
-        return UserModel()
-
     def _save_path(self) -> Path:
         return Path(__file__).parent / "my_info.json"
 

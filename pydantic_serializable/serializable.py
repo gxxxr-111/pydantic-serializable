@@ -20,9 +20,8 @@ class Serializable(Generic[T], ABC):
         self.save_path = self._save_path()
         self.data = self.load_data()
 
-    @abstractmethod
     def _default_data(self) -> T:
-        pass
+        return self._type_T()
 
     @abstractmethod
     def _save_path(self) -> Path:
