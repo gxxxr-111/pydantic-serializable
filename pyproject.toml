@@ -1,6 +1,6 @@
 [project]
 name = "pydantic-serializable"
-version = "0.1.2"
+version = "0.1.3"
 description = "A lightweight, type-safe base class for serializing/deserializing Pydantic models to/from JSON files, with built-in fallback to default data and overwrite protection."
 authors = [
     { name = "Mirage_", email = "gaoxuran111@gmail.com" }
